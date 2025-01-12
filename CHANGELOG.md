@@ -31,3 +31,6 @@ I need to:
   - [ ] add start point and end point
     - don't need to actually add multiple levels, just have the things there
 - [ ] explode on contact?
+
+
+start working again at 6:38pm

@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 
-
 enum HarpoonState {CHARGING, SHOT, REELING}
 var harpoon_state: HarpoonState = HarpoonState.CHARGING
 
@@ -15,6 +14,9 @@ var harpoon_position: Vector2
 var harpoon_velocity: Vector2
 
 var harpoon_revert_speed = 0.0
+
+@export
+var HARPOON_MAX_DIST = 2000.0
 
 func init_harpoon():
 	harpoon_state = HarpoonState.CHARGING
@@ -57,6 +59,9 @@ func harpoon_physics_process(delta: float) -> void:
 	harpoon_position += harpoon_velocity * delta
 	
 	$Harpoon.global_position=harpoon_position
+	
+	if self.global_position.distance_to(harpoon_position) > HARPOON_MAX_DIST:
+		init_harpoon()
 
 #func recall_harpoon() -> void:
 	#var difference = harpoon_position - self.global_position
