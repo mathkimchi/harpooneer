@@ -5,6 +5,7 @@ var CHARGE_RATE = 1.0
 
 var harpoon_charge = 0.0
 var is_harpoon_shot = false
+var is_harpoon_locked = false
 
 var harpoon_position: Vector2
 var harpoon_velocity: Vector2
@@ -23,6 +24,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func harpoon_physics_process(delta: float) -> void:
+	if is_harpoon_locked:
+		return
+	
+	for body in $Harpoon/Area2D.get_overlapping_bodies():
+		if body == self:
+			continue
+		
+		print(body)
+		is_harpoon_locked = true
+	
 	harpoon_velocity += get_gravity() * delta
 	harpoon_position += harpoon_velocity * delta
 	
