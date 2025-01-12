@@ -1,10 +1,8 @@
 extends CharacterBody2D
 
 
-enum HarpoonState {CHARGING, SHOT, REELING}
+enum HarpoonState {CHARGING, SHOT, LOCKED, REELING}
 var harpoon_state: HarpoonState = HarpoonState.CHARGING
-
-var harpoon_locked = false
 
 @export
 var CHARGE_RATE = 1.0
@@ -13,7 +11,7 @@ var harpoon_charge = 0.0
 var harpoon_position: Vector2
 var harpoon_velocity: Vector2
 
-var harpoon_revert_speed = 0.0
+var harpoon_reel_speed = 0.0
 
 @export
 var HARPOON_MAX_DIST = 2000.0
@@ -21,10 +19,9 @@ var HARPOON_MAX_DIST = 2000.0
 func init_harpoon():
 	harpoon_state = HarpoonState.CHARGING
 	harpoon_charge = 0.0
-	harpoon_locked = false
 	harpoon_position = Vector2.ZERO #whatever, this will be updated anyways
 	harpoon_velocity = Vector2.ZERO
-	harpoon_revert_speed = 0.0
+	harpoon_reel_speed = 0.0
 	$Harpoon.global_position=self.global_position
 	
 
@@ -39,21 +36,22 @@ func _physics_process(delta: float) -> void:
 				harpoon_charge += CHARGE_RATE * delta
 		HarpoonState.SHOT:
 			harpoon_physics_process(delta)
+		HarpoonState.LOCKED:
+			pass
 		HarpoonState.REELING:
 			pass
 
 	move_and_slide()
 	
 func harpoon_physics_process(delta: float) -> void:
-	if harpoon_locked:
-		return
-	
 	for body in $Harpoon/Area2D.get_overlapping_bodies():
 		if body == self:
 			continue
 		
 		print(body)
-		harpoon_locked = true
+		
+		harpoon_state = HarpoonState.LOCKED
+		return
 	
 	harpoon_velocity += get_gravity() * delta
 	harpoon_position += harpoon_velocity * delta
@@ -103,6 +101,6 @@ func _input(event: InputEvent) -> void:
 				init_harpoon()
 	elif event.is_pressed():
 		match harpoon_state:
-			HarpoonState.SHOT:
+			HarpoonState.LOCKED:
 				# start reeling
 				harpoon_state = HarpoonState.REELING
