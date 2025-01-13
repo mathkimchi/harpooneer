@@ -37,3 +37,7 @@ start working again at 6:38pm
 
 1:39
 reeling took a while to balance
+
+2:49
+so many features left, but I don't have time.
+I will start to export.

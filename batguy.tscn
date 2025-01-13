@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bovrroddenbj5"]
+[gd_scene load_steps=4 format=3 uid="uid://bovrroddenbj5"]
 
 [ext_resource type="Script" path="res://batguy.gd" id="1_8itid"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x28kf"]
 size = Vector2(50, 56)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p6lk1"]
+radius = 314.916
 
 [node name="Batguy" type="CharacterBody2D"]
 script = ExtResource("1_8itid")
@@ -38,3 +41,9 @@ offset_top = -27.0
 offset_right = 10.0
 offset_bottom = -14.0
 color = Color(1, 0.76028, 0.715063, 1)
+
+[node name="ActiveArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveArea"]
+shape = SubResource("CircleShape2D_p6lk1")

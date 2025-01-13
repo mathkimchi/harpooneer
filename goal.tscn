@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4lfx17soulsf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dp0o4"]
+
+[node name="Goal" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dp0o4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 11.0
+offset_bottom = 10.0
+color = Color(1, 1, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -33.0
+offset_top = -34.0
+offset_right = 36.0
+offset_bottom = -11.0
+text = "You Win!"
