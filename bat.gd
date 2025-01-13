@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		#velocity += Vector2.DOWN * delta * 100
-		velocity += get_gravity() * delta * 0.5
+		velocity += get_gravity() * delta * 0.4
 
 	# Handle jump.
 	if can_flap and (-player.global_position.y >= -self.global_position.y): # up is negative
@@ -29,3 +29,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x = x_direction * SPEED
 
 	move_and_slide()
+
+# special name for the harpoon
+func enemy_damage()->void:
+	self.queue_free()

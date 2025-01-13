@@ -57,6 +57,12 @@ func _physics_process(delta: float) -> void:
 func shot_harpoon_physics_process(delta: float) -> void:
 	for body in $Harpoon/Area2D.get_overlapping_bodies():
 		if body == self:
+			# intersecting with the player is fine
+			continue
+		
+		if body.has_method("enemy_damage"):
+			# collided with an enemy
+			body.enemy_damage()
 			continue
 		
 		print(body)
