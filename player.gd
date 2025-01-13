@@ -11,7 +11,8 @@ var harpoon_charge = 0.0
 var harpoon_position: Vector2
 var harpoon_velocity: Vector2
 
-var harpoon_reel_speed = 0.0
+@export
+var HARPOON_REEL_ACC = 1500.0
 
 @export
 var HARPOON_MAX_DIST = 2000.0
@@ -19,11 +20,11 @@ var HARPOON_MAX_DIST = 2000.0
 func init_harpoon():
 	harpoon_state = HarpoonState.CHARGING
 	harpoon_charge = 0.0
-	harpoon_position = Vector2.ZERO #whatever, this will be updated anyways
+	harpoon_position = self.global_position #whatever, this will be updated anyways
 	harpoon_velocity = Vector2.ZERO
-	harpoon_reel_speed = 0.0
-	$Harpoon.global_position=self.global_position
-	
+
+func _ready() -> void:
+	init_harpoon()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -34,16 +35,26 @@ func _physics_process(delta: float) -> void:
 		HarpoonState.CHARGING:
 			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 				harpoon_charge += CHARGE_RATE * delta
+			harpoon_position = self.global_position
+			
+			# apply friction twice if charging
+			velocity = velocity.limit_length(maxf(velocity.length()*(0.9**delta)-50*delta, 0))
 		HarpoonState.SHOT:
-			harpoon_physics_process(delta)
+			shot_harpoon_physics_process(delta)
 		HarpoonState.LOCKED:
 			pass
 		HarpoonState.REELING:
-			pass
+			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+				self.velocity += (HARPOON_REEL_ACC+self.position.distance_to(harpoon_position)) * delta * self.position.direction_to(harpoon_position)
+				
+	# friction
+	velocity = velocity.limit_length(maxf(velocity.length()*(0.95**delta)-50*delta, 0))
 
 	move_and_slide()
 	
-func harpoon_physics_process(delta: float) -> void:
+	$Harpoon.global_position=harpoon_position
+	
+func shot_harpoon_physics_process(delta: float) -> void:
 	for body in $Harpoon/Area2D.get_overlapping_bodies():
 		if body == self:
 			continue
@@ -55,9 +66,7 @@ func harpoon_physics_process(delta: float) -> void:
 	
 	harpoon_velocity += get_gravity() * delta
 	harpoon_position += harpoon_velocity * delta
-	
-	$Harpoon.global_position=harpoon_position
-	
+		
 	if self.global_position.distance_to(harpoon_position) > HARPOON_MAX_DIST:
 		init_harpoon()
 

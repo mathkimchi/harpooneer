@@ -16,10 +16,10 @@ I will take a break.
 Picking up:
 I need to:
 
-- [ ] add max distance to shoot (just skip straight to charging if too far)
-- [ ] add locked state
+- [x] add max distance to shoot (just skip straight to charging if too far)
+- [x] add locked state
   - reel state will assume it was previously locked, because if the player tries to reel just reset to charging state
-- [ ] apply force to player on reel
+- [x] apply force to player on reel
 - [ ] make enemies
   - [ ] bat enemies
     - cool ai idea: bats have a flapping cooldown, their x vel is just towards the player and they flap if cooldown is over and the player is above them  (like flappy bird)
@@ -34,3 +34,6 @@ I need to:
 
 
 start working again at 6:38pm
+
+1:39
+reeling took a while to balance
