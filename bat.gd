@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 150.0
 const FLAP_VELOCITY = -300.0
-const BAT_FLAP_COOLDOWN = 0.4
+const BAT_FLAP_COOLDOWN = 1.0
 
 var can_flap = true
 
@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		#velocity += Vector2.DOWN * delta * 100
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta * 0.5
 
 	# Handle jump.
 	if can_flap and (-player.global_position.y >= -self.global_position.y): # up is negative
