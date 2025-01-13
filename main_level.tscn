@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8qc5apdl0u5r"]
+[gd_scene load_steps=6 format=3 uid="uid://c8qc5apdl0u5r"]
 
 [ext_resource type="PackedScene" uid="uid://dylwjeydch4fx" path="res://player.tscn" id="1_hi1ko"]
 [ext_resource type="PackedScene" uid="uid://bl54vcv4htlu6" path="res://bat.tscn" id="2_rpm6s"]
+[ext_resource type="PackedScene" uid="uid://bovrroddenbj5" path="res://batguy.tscn" id="3_rc17f"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_ghafl"]
 
@@ -37,3 +38,6 @@ shape = SubResource("RectangleShape2D_6ey7h")
 position = Vector2(752, 61)
 
 [node name="Bat" parent="." instance=ExtResource("2_rpm6s")]
+
+[node name="Batguy" parent="." instance=ExtResource("3_rc17f")]
+position = Vector2(1226, 49)

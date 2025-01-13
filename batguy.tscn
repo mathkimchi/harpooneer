@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bovrroddenbj5"]
+
+[ext_resource type="Script" path="res://batguy.gd" id="1_8itid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x28kf"]
+size = Vector2(50, 56)
+
+[node name="Batguy" type="CharacterBody2D"]
+script = ExtResource("1_8itid")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x28kf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -13.0
+offset_right = 10.0
+offset_bottom = 28.0
+color = Color(0.435192, 0.435192, 0.435192, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -25.0
+offset_top = -21.0
+offset_right = 25.0
+offset_bottom = -6.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -5.0
+offset_top = -1.0
+offset_right = 5.0
+offset_bottom = 12.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect3"]
+layout_mode = 0
+offset_top = -27.0
+offset_right = 10.0
+offset_bottom = -14.0
+color = Color(1, 0.76028, 0.715063, 1)

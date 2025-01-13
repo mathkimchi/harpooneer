@@ -21,9 +21,9 @@ I need to:
   - reel state will assume it was previously locked, because if the player tries to reel just reset to charging state
 - [x] apply force to player on reel
 - [ ] make enemies
-  - [ ] bat enemies
+  - [x] bat enemies
     - cool ai idea: bats have a flapping cooldown, their x vel is just towards the player and they flap if cooldown is over and the player is above them  (like flappy bird)
-  - [ ] batman
+  - [x] batguy
     - walks and spawns bats
     - if time, give different personalities, like always chase player vs keep distance
 - [ ] map
